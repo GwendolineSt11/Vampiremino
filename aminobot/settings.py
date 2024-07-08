@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import django_heroku
+import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -74,12 +76,11 @@ WSGI_APPLICATION = 'aminobot.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+DATABASE_URL = os.environ.get('DATABASE_URL', 'postgres://u3n148vuts38uf:p2192abbcc89b3edeb381de4220e853f82b97bdac9cfa3a50430a7e5f2516ad63@c5p86clmevrg5s.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/dc2e4h1ueen9rk')
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    'default': dj_database_url.config(default=DATABASE_URL),
     }
-}
+
 
 
 # Password validation
