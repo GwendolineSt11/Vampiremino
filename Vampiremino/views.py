@@ -8,7 +8,6 @@ from nacl.exceptions import BadSignatureError
 import json
 import logging
 import encodings
-import interactions
 import os
 from dotenv import load_dotenv
 
