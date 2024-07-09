@@ -12,11 +12,9 @@ import encodings
 import os
 from dotenv import load_dotenv
 from flask import Blueprint, jsonify
+from .Vampiremino import bot, devId
 
 bp = Blueprint('main', __name__)
-
-
-PUBLIC_KEY = ''
 
 
 @csrf_exempt
@@ -25,7 +23,7 @@ def bot_view(request):
         try:
             raw_body = request.body
             try:
-                verify_key = VerifyKey(bytes.fromhex(PUBLIC_KEY))
+                verify_key = VerifyKey(bytes.fromhex(devId))
                 verify_key.verify(raw_body)
 
             except BadSignatureError as e:
@@ -34,8 +32,7 @@ def bot_view(request):
 
             if verify_key == verify_key:
                 logger_info = {
-                    logging.debug(f"Signature verified successfully: {signature}"),
-                    logging.debug(f"Timestamp: {timestamp}"),
+                    
                     logging.debug(f"Raw Body: {raw_body}"),
                 }
                 return JsonResponse(f'logger info: {logger_info}', status=200)
@@ -55,11 +52,11 @@ def bot_view(request):
     if request.method == 'GET':
         return HttpResponse("Hello, this is the interaction endpoint!")
 
-    @bp.route('/interactions/', methods=['GET'])
+    @bp.route('/interactions/', methods=['POST', 'GET'])
     def interactions():
         return jsonify({"message": "Hello, this is the interaction endpoint!"})
     pass
-    
+
     if request.method == 'OPTIONS':
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')

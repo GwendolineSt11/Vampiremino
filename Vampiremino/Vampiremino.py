@@ -25,6 +25,7 @@ bot = Bot(
     )
 chatId = ''
 tz = pytz.timezone('America/Mexico_City')
+devId = '19DDCCD74FD9DAF165A96046950D899B1CB1FE1D0B8A1BA53C914175EE59D36D106C7AA7396A521EC3'
 
 response = requests.get('https://vampiremino-21656f34130d.herokuapp.com/interactions/')
 try:
