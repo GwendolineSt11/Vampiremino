@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-g-hs$gxv8*wlxj#^lrreh0%5essk-2e^*s(#xw%ignxb6vc+#j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://git.heroku.com/vampiremino.git']
+ALLOWED_HOSTS = ['localhost', 'https://git.heroku.com/vampiremino.git', 'vampiremino-21656f34130d.herokuapp.com', 'gwenactivities.store', 'service.aminoapps.com']
 
 # Application definition
 
