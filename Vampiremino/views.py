@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect, HttpRequest
 from django.urls import path, include
 from django.views.decorators.csrf import csrf_exempt
+from flask import jsonify
 from urllib.request import urlopen
 from nacl.signing import VerifyKey
 from nacl.exceptions import BadSignatureError
@@ -50,7 +51,7 @@ def bot_view(request):
             return JsonResponse({'error': 'Internal Server Error'}, status=500)
 
     if request.method == 'GET':
-        return HttpResponse("Hello, this is the interaction endpoint!")
+        return jsonify("Hello, this is the interaction endpoint!")
 
     if request.method == 'OPTIONS':
         self.send_response(200)

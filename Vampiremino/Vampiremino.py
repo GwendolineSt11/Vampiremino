@@ -4,6 +4,7 @@ from pymino.ext import *
 import logging
 import pytz
 import datetime
+import json
 from datetime import datetime
 import amino
 from amino.id import Id
@@ -12,18 +13,26 @@ import requests
 
 bot = Bot(
     command_prefix="!",
-    community_id='super_mario',
+    community_id='210127143',
     console_enabled=True,
-    device_id='0136a754f2e4de68cbb2a5f94632bb04bafc0c0c4d73b364af2c9e1b0d2da51b840416c96592cabb7e',
-    device_key='c1caaf081376b4bc83df15ef7deda917a4b56f55',
-    signature_key='a5200a71589409a4629dda94c5ae9ee91bd7a2d0',
+    device_id='19DDCCD74FD9DAF165A96046950D899B1CB1FE1D0B8A1BA53C914175EE59D36D106C7AA7396A521EC3',
+    device_key='E7309ECC0953C6FA60005B2765F99DBBC965C8E9',
+    signature_key='DFA5ED192DDA6E88A12FE12130DC6206B1251E44',
     service_key='c22b5523-e67e-4460-8bb1-92a8cb3b0112',
     intents=True,
     online_status=True,
-    proxy="http://127.0.0.1:8000"
+    proxy="https://vampiremino-21656f34130d.herokuapp.com/interactions/"
     )
 chatId = ''
 tz = pytz.timezone('America/Mexico_City')
+
+response = requests.get('https://vampiremino-21656f34130d.herokuapp.com/interactions/')
+try:
+    data = response.json()
+except json.decoder.JSONDecodeError as e:
+    print(f"JSON decode error: {e}")
+    print(f"Response content: {response.text}")
+    print(f"Response status code: {response.status_code}")
 
 
 @bot.on_ready()
