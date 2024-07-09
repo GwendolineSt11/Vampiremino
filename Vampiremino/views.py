@@ -51,7 +51,7 @@ def bot_view(request):
             return JsonResponse({'error': 'Internal Server Error'}, status=500)
 
     if request.method == 'GET':
-        return HttpResponse("Hello, this is the interaction endpoint!"), JsonResponse({'Status': 'Good'}, status=200)
+        return jsonify("Hello, this is the interaction endpoint!")
 
     pass
 
