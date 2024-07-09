@@ -19,44 +19,45 @@ bp = Blueprint('main', __name__)
 
 @csrf_exempt
 def bot_view(request):
-        try:
-            @bp.route('/interactions/', methods=['POST', 'GET'])
-            def interactions():
+    try:
+        @bp.route('/interactions/', methods=['POST', 'GET'])
+        def interactions():
+            try:
+                raw_body = request.body
                 try:
-                    raw_body = request.body
-                    try:
-                        verify_key = VerifyKey(bytes.fromhex(devId))
-                        verify_key.verify(raw_body)
-                    except BadSignatureError as e:
-                        logging.error(f"Signature verification failed: {e}")
-                        return JsonResponse({'Error': 'Signature verification failed'}, status=401)
+                    verify_key = VerifyKey(bytes.fromhex(devId))
+                    verify_key.verify(raw_body)
+                except BadSignatureError as e:
+                    logging.error(f"Signature verification failed: {e}")
+                    return JsonResponse({'Error': 'Signature verification failed'}, status=401)
 
-                    if verify_key == verify_key:
-                        logger_info = {
-                            logging.debug(f"Raw Body: {raw_body}"),
+                if verify_key == verify_key:
+                    logger_info = {
+                        logging.debug(f"Raw Body: {raw_body}"),
+                    }
+                    return JsonResponse(f'logger info: {logger_info}', status=200)
+
+                if data.get('type') == 1:
+                    response_data = {
+                        "type": 1,
                         }
-                        return JsonResponse(f'logger info: {logger_info}', status=200)
+                    return JsonResponse(response_data, safe=False)
 
-                    if data.get('type') == 1:
-                        response_data = {
-                            "type": 1,
-                            }
-                        return JsonResponse(response_data, safe=False)
+            except Exception as e:
+                logging.error(f"Internal Server Error: {e}" + f"logger info: {logger_info}")
+                return JsonResponse({'error': 'Internal Server Error'}, status=500)
+            pass
 
-                except Exception as e:
-                    logging.error(f"Internal Server Error: {e}" + f"logger info: {logger_info}")
-                    return JsonResponse({'error': 'Internal Server Error'}, status=500)
-                pass
+            return jsonify({"message": "Hello, this is the interaction endpoint!"})
 
-                return jsonify({"message": "Hello, this is the interaction endpoint!"})
-
-
-            if request.method == 'OPTIONS':
-                self.send_response(200)
-                self.send_header('Access-Control-Allow-Origin', '*')
-                self.send_header('Access-Control-Allow-Methods', 'POST, OPTIONS')
-                self.send_header('Access-Control-Allow-Headers', 'Content-Type')
-                self.end_headers()
-            else:
-                logging.warning("Invalid request method received")
-                return JsonResponse({'error': 'Invalid request method'}, status=405)
+        if request.method == 'OPTIONS':
+            self.send_response(200)
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.send_header('Access-Control-Allow-Methods', 'POST, OPTIONS')
+            self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+            self.end_headers()
+        else:
+            logging.warning("Invalid request method received")
+            return JsonResponse({'error': 'Invalid request method'}, status=405)
+    finally:
+        return HttpResponse("Come at me, bro!")
