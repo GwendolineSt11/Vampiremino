@@ -51,7 +51,9 @@ def bot_view(request):
             return JsonResponse({'error': 'Internal Server Error'}, status=500)
 
     if request.method == 'GET':
-        return HttpResponse("Hello, this is the interaction endpoint!")
+        return HttpResponse("Hello, this is the interaction endpoint!"), JsonResponse({'Status': 'Good'}, status=200)
+
+    pass
 
     if request.method == 'OPTIONS':
         self.send_response(200)
@@ -62,4 +64,3 @@ def bot_view(request):
     else:
         logging.warning("Invalid request method received")
         return JsonResponse({'error': 'Invalid request method'}, status=405)
-
