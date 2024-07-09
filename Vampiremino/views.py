@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect, HttpRequest
 from django.urls import path, include
 from django.views.decorators.csrf import csrf_exempt
-from flask import jsonify
+from flask import jsonify, Flask
 from urllib.request import urlopen
 from nacl.signing import VerifyKey
 from nacl.exceptions import BadSignatureError
@@ -11,8 +11,10 @@ import logging
 import encodings
 import os
 from dotenv import load_dotenv
+from flask import Blueprint, jsonify
 
-load_dotenv()
+bp = Blueprint('main', __name__)
+
 
 PUBLIC_KEY = ''
 

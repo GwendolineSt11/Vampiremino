@@ -1,10 +1,11 @@
-from sanic import Sanic
+from flask import Flask
 
 
-def __init__():
-    return None
+def create_app():
+    app = Flask(__name__)
 
+    with app.app_context():
+        from . import views
+        app.register_blueprint(views.bp)
 
-def create_app_instance():
-    application = Sanic(name="Vampiremino")
-    return application
+    return app
