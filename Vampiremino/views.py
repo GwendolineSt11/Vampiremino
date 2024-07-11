@@ -13,6 +13,7 @@ from dotenv import load_dotenv
 
 
 devId = '19DDCCD74FD9DAF165A96046950D899B1CB1FE1D0B8A1BA53C914175EE59D36D106C7AA7396A521EC3'
+verify_key = 1      #placeholder
 
 @csrf_exempt
 def bot_view(request):
@@ -26,7 +27,7 @@ def bot_view(request):
                # logging.error(f"Signature verification failed: {e}")
               #  return JsonResponse({'Error': 'Signature verification failed'}, status=401)
 
-            if verify_key == verify_key:
+            if verify_key == 1:
                 logger_info = {
                     logging.debug(f"Raw Body: {raw_body}"),
                 }
