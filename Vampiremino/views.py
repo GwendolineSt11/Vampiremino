@@ -20,8 +20,9 @@ def bot_view(request):
     try:
         if request.method == 'POST':
             raw_body = request.body
+            signature = request.headers.get(signature_key)
             try:
-                verify_key = VerifyKey(bytes.fromhex(signature_key))
+                verify_key = VerifyKey(bytes.fromhex(signature))
                 verify_key.verify(raw_body)
             except BadSignatureError as e:
                 logging.error(f"Signature verification failed: {e}")
@@ -38,7 +39,7 @@ def bot_view(request):
                     "type": 1,
                     }
                 return JsonResponse(response_data, safe=False)
-            
+
             return JsonResponse({'Message': 'Hey!'}, status=200)
 
         if request.method == 'GET':
