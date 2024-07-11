@@ -12,7 +12,7 @@ import os
 from dotenv import load_dotenv
 
 
-signature_key = '4a9a340e-68e2-4016-a3b4-0bf79677b371'
+signature_key = '4a9a340e68e24016a3b40bf79677b371'
 #placeholder
 
 @csrf_exempt
@@ -38,6 +38,8 @@ def bot_view(request):
                     "type": 1,
                     }
                 return JsonResponse(response_data, safe=False)
+            
+            return JsonResponse({'Message': 'Hey!'}, status=200)
 
         if request.method == 'GET':
             return HttpResponse("Hello, this is the interaction endpoint!")
