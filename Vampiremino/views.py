@@ -40,7 +40,7 @@ def bot_view(request):
                 return JsonResponse(response_data, safe=False)
 
         if request.method == 'GET':
-            return HttpResponse("Hello, this is the interaction endpoint!", safe=False)
+            return HttpResponse("Hello, this is the interaction endpoint!")
 
     except Exception as e:
         logging.error(f"Internal Server Error: {e}")
