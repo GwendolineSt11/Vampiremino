@@ -37,12 +37,11 @@ def bot_view(request):
                 response_data = {
                     "type": 1,
                     }
-                return JsonResponse(response_data)
+                return JsonResponse(response_data, safe=False)
 
         except Exception as e:
             logging.error(f"Internal Server Error: {e}")
             return JsonResponse({'error': 'Internal Server Error'}, status=500)
-            pass
 
         return HttpResponse("Hello, this is the interaction endpoint!")
 
