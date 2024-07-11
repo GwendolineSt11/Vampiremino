@@ -57,3 +57,4 @@ def bot_view(request):
         logging.warning("Invalid request method received")
         return JsonResponse({'error': 'Invalid request method'}, status=405)
 
+    return JsonResponse("Hello, this is the interaction endpoint!")
