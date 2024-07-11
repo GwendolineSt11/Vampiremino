@@ -12,7 +12,6 @@ import encodings
 import os
 from dotenv import load_dotenv
 from flask import Blueprint, jsonify
-from .Vampiremino import bot, devId
 
 bp = Blueprint('main', __name__)
 
@@ -41,7 +40,7 @@ def bot_view(request):
                     response_data = {
                         "type": 1,
                         }
-                    return JsonResponse(response_data, safe=False)
+                    return JsonResponse(response_data)
 
             except Exception as e:
                 logging.error(f"Internal Server Error: {e}" + f"logger info: {logger_info}")
