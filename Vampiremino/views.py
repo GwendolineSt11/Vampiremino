@@ -19,12 +19,12 @@ def bot_view(request):
     if request.method in ['POST', 'GET']:
         try:
             raw_body = request.body
-            try:
-                verify_key = VerifyKey(bytes.fromhex(devId))
-                verify_key.verify(raw_body)
-            except BadSignatureError as e:
-                logging.error(f"Signature verification failed: {e}")
-                return JsonResponse({'Error': 'Signature verification failed'}, status=401)
+           # try:
+               # verify_key = VerifyKey(bytes.fromhex(devId))
+               # verify_key.verify(raw_body)
+           # except BadSignatureError as e:
+               # logging.error(f"Signature verification failed: {e}")
+              #  return JsonResponse({'Error': 'Signature verification failed'}, status=401)
 
             if verify_key == verify_key:
                 logger_info = {
@@ -43,7 +43,7 @@ def bot_view(request):
             return JsonResponse({'error': 'Internal Server Error'}, status=500)
             pass
 
-        return HttpResponse({"message": "Hello, this is the interaction endpoint!"})
+        return HttpResponse("Hello, this is the interaction endpoint!")
 
     if request.method == 'OPTIONS':
         self.send_response(200)
