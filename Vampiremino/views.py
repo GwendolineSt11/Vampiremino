@@ -39,23 +39,18 @@ def bot_view(request):
                     "type": 1,
                     }
                 return JsonResponse(response_data, safe=False)
+            if request.method == 'GET':
+                return HttpResponse("Hello, this is the interaction endpoint!")
 
-            return JsonResponse({'Message': 'Hey!'}, status=200)
-
-        if request.method == 'GET':
-            return HttpResponse("Hello, this is the interaction endpoint!")
+            if request.method == 'OPTIONS':
+                self.send_response(200)
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.send_header('Access-Control-Allow-Methods', 'POST, OPTIONS')
+                self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+                self.end_headers()
+        return JsonResponse({'Message': 'Hey!'}, status=200)
 
     except Exception as e:
         logging.error(f"Internal Server Error: {e}")
         return JsonResponse({'error': 'Internal Server Error'}, status=500)
 
-    if request.method == 'OPTIONS':
-        self.send_response(200)
-        self.send_header('Access-Control-Allow-Origin', '*')
-        self.send_header('Access-Control-Allow-Methods', 'POST, OPTIONS')
-        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
-        self.end_headers()
-
-    else:
-        logging.warning("Invalid request method received")
-        return JsonResponse({'error': 'Invalid request method'}, status=405)
