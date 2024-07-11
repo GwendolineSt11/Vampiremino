@@ -1,3 +1,4 @@
 git add .
-git commit -m "Upgradeado automaticamente sin acento"
+git commit -m "Auto-upgrade"
 git push heroku master:main
+heroku restart
