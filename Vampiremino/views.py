@@ -39,7 +39,7 @@ def bot_view(request):
                 return JsonResponse(response_data)
 
         except Exception as e:
-            logging.error(f"Internal Server Error: {e}" + f"logger info: {logger_info}")
+            logging.error(f"Internal Server Error: {e}")
             return JsonResponse({'error': 'Internal Server Error'}, status=500)
             pass
 
