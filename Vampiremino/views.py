@@ -13,12 +13,12 @@ from dotenv import load_dotenv
 
 
 devId = '19DDCCD74FD9DAF165A96046950D899B1CB1FE1D0B8A1BA53C914175EE59D36D106C7AA7396A521EC3'
-verify_key = 1      #placeholder
+verify_key = 1    #placeholder
 
 @csrf_exempt
 def bot_view(request):
-    if request.method in ['POST', 'GET']:
-        try:
+    try:
+        if request.method == 'POST':
             raw_body = request.body
            # try:
                # verify_key = VerifyKey(bytes.fromhex(devId))
@@ -39,11 +39,12 @@ def bot_view(request):
                     }
                 return JsonResponse(response_data, safe=False)
 
-        except Exception as e:
-            logging.error(f"Internal Server Error: {e}")
-            return JsonResponse({'error': 'Internal Server Error'}, status=500)
+        if request.method == 'GET':
+            return HttpResponse("Hello, this is the interaction endpoint!", safe=False)
 
-        return HttpResponse("Hello, this is the interaction endpoint!", safe=False)
+    except Exception as e:
+        logging.error(f"Internal Server Error: {e}")
+        return JsonResponse({'error': 'Internal Server Error'}, status=500)
 
     if request.method == 'OPTIONS':
         self.send_response(200)
