@@ -43,7 +43,7 @@ def bot_view(request):
             logging.error(f"Internal Server Error: {e}")
             return JsonResponse({'error': 'Internal Server Error'}, status=500)
 
-        return HttpResponse("Hello, this is the interaction endpoint!")
+        return HttpResponse("Hello, this is the interaction endpoint!", safe=False)
 
     if request.method == 'OPTIONS':
         self.send_response(200)
