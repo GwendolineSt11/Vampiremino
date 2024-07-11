@@ -1,12 +1,10 @@
-from flask import Flask
+from sanic import Sanic
 
 
 def __init__():
     return None
 
 
-def create_app():
-    app = Flask(__name__)
-    if __name__ == "__main__":
-        return app
-
+def create_app_instance():
+    application = Sanic(name="aminobot")
+    return application
