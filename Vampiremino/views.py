@@ -49,6 +49,8 @@ def bot_view(request):
                 return JsonResponse({'error': 'Internal Server Error'}, status=500)
 
         if request.method == 'GET':
+            if placeholder == '1':
+                return JsonResponse({'Message': 'Hey!'}, status=200)
             return HttpResponse("Hello, this is the interaction endpoint!")
 
         if request.method == 'OPTIONS':
